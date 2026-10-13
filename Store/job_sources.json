@@ -1,0 +1,14 @@
+{
+  "sources": [
+    {
+      "id": "jobtech-jobsearch",
+      "kind": "jobsearch",
+      "base_url": "https://jobsearch.api.jobtechdev.se",
+      "enabled": true,
+      "max_keywords": 8,
+      "results_per_keyword": 50,
+      "max_pages_per_keyword": 2,
+      "refresh_minutes": 240
+    }
+  ]
+}

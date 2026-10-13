@@ -1,0 +1,1063 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  color: white;
+  background-color: #0d0d2b;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  color: inherit;
+}
+
+
+/* =========================
+   APP
+   ========================= */
+
+.app {
+  display: flex;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
+
+  background-color: #0d0d2b;
+}
+
+
+/* =========================
+   SIDEBAR
+   ========================= */
+
+.sidebar {
+  flex: 0 0 250px;
+
+  width: 300px;
+  height: 100%;
+
+  padding: 110px 55px 25px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  overflow: hidden;
+
+  background-color: #151531;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  gap: 100px;
+}
+
+.sidebar-nav a {
+  padding: 0;
+
+  border: none;
+  background: transparent;
+
+  font-size: clamp(20px, 3vw, 38px);
+
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+.sidebar-nav a:hover {
+  color: #8b65d4;
+}
+
+
+/* =========================
+   DASHBOARD
+   ========================= */
+
+.dashboard {
+  position: relative;
+
+  flex: 1;
+
+  width: 100%;
+  height: 100%;
+
+  min-width: 0;
+  min-height: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  overflow: hidden;
+
+  padding: 20px 30px;
+}
+
+.dashboard h1 {
+  margin: 0;
+
+  font-size: 58px;
+
+  flex-shrink: 0;
+}
+
+
+/* =========================
+   DASHBOARD CENTER
+   ========================= */
+
+.dashboard-center {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  width: min(700px, 80%);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 45px;
+}
+
+
+/* =========================
+   ACTIVE SEARCH LAYOUT
+   ========================= */
+
+/*
+   Search must be INSIDE dashboard-center
+   for these selectors to work.
+*/
+
+.dashboard-center:has(.search-area.active) #upload-button,
+.dashboard-center:has(.search-area.active) .settings-box {
+  display: none;
+}
+
+.dashboard-center:has(.search-area.active) {
+  top: 130px;
+  bottom: 25px;
+
+  transform: translateX(-50%);
+
+  width: min(950px, 90%);
+  height: auto;
+
+  gap: 0;
+}
+
+
+/* =========================
+   LOGO
+   ========================= */
+
+.logo-box {
+  position: absolute;
+
+  top: 25px;
+  right: 40px;
+
+  width: 95px;
+  height: 95px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  border-radius: 24px;
+
+  background: linear-gradient(
+    145deg,
+    #101031,
+    #09091c
+  );
+
+  box-shadow: 0 0 0 1px #26265c;
+}
+
+.logo-box span {
+  font-size: 28px;
+}
+
+.logo-box strong {
+  font-size: 42px;
+  color: #f32d9c;
+}
+
+
+/* =========================
+   UPLOAD
+   ========================= */
+
+#upload-button {
+  width: 335px;
+
+  padding: 30px 20px;
+
+  border: 2px solid #303052;
+  border-radius: 70px;
+
+  background-color: #171735;
+
+  font-size: 38px;
+
+  cursor: pointer;
+
+  flex-shrink: 0;
+}
+
+#upload-button:hover {
+  background-color: #202047;
+}
+
+
+/* =========================
+   SETTINGS
+   ========================= */
+
+.settings-box {
+  width: 455px;
+
+  margin-top: 50px;
+
+  flex-shrink: 0;
+}
+
+.setting-row,
+.sort-row {
+  min-height: 80px;
+
+  display: grid;
+
+  grid-template-columns: 1fr 105px;
+
+  align-items: center;
+
+  font-size: 21px;
+  font-weight: bold;
+}
+
+.toggle-input {
+  display: none;
+}
+
+.toggle {
+  position: relative;
+
+  width: 105px;
+  height: 43px;
+
+  border-radius: 30px;
+
+  background-color: #6d4fb2;
+
+  cursor: pointer;
+}
+
+.toggle-circle {
+  position: absolute;
+
+  top: 3px;
+  left: 4px;
+
+  width: 37px;
+  height: 37px;
+
+  border-radius: 50%;
+
+  background-color: white;
+
+  transition: transform 0.2s;
+}
+
+.toggle-input:checked + .toggle .toggle-circle {
+  transform: translateX(60px);
+}
+
+.sort-row {
+  margin-top: 5px;
+}
+
+.sort-button {
+  border: none;
+
+  background: transparent;
+
+  font-weight: bold;
+
+  cursor: pointer;
+}
+
+
+/* =========================
+   SEARCH AREA
+   ========================= */
+
+.search-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.search-area.active {
+  width: 100%;
+  height: 100%;
+
+  min-height: 0;
+
+  gap: 18px;
+}
+
+
+/* =========================
+   SEARCH BUTTON
+   ========================= */
+
+.search-button {
+  padding: 10px 30px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 1px;
+
+  border: none;
+  border-radius: 35px;
+
+  background-color: #6d4fb2;
+
+  font-size: 21px;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  flex-shrink: 0;
+}
+
+.search-button:hover {
+  background-color: #8060cc;
+}
+
+.star {
+  width: 27px;
+  height: 27px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+
+  color: #6d4fb2;
+  background-color: white;
+}
+
+/* =========================
+   JOB RESULTS
+   ========================= */
+
+.results-container {
+  width: 100%;
+
+  flex: 1;
+  min-height: 0;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  overscroll-behavior: contain;
+
+  scroll-snap-type: y mandatory;
+
+  scrollbar-gutter: stable;
+}
+
+
+/*
+   Normal state stays exactly
+   as before: 5 jobs per page.
+*/
+
+.results-page {
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+
+  display: grid;
+
+  grid-template-rows: repeat(5, minmax(0, 1fr));
+
+  gap: 8px;
+
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+
+/*
+   Only when a job is expanded,
+   allow the page to become taller.
+
+   This lets the expanded card push
+   every job below it downward.
+*/
+
+.results-page:has(.job-card-expanded) {
+  height: auto;
+  min-height: 100%;
+
+  grid-template-rows: none;
+  grid-auto-rows: auto;
+}
+
+
+/* =========================
+   JOB CARD
+   ========================= */
+
+.job-card {
+  position: relative;
+
+  width: 100%;
+
+  min-width: 0;
+  min-height: 0;
+
+  padding: 10px 16px 38px;
+
+  border: 1px solid #888;
+  border-radius: 8px;
+
+  overflow: hidden;
+}
+
+.job-card h3 {
+  margin: 0 0 5px;
+
+  font-size: 18px;
+  line-height: 1.15;
+}
+
+.job-card p {
+  margin: 2px 0;
+
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.job-card a {
+  display: inline-block;
+
+  margin-top: 3px;
+
+  font-size: 14px;
+}
+
+
+/* =========================
+   EXPANDED JOB
+   ========================= */
+
+.job-card-expanded {
+  height: auto;
+  min-height: max-content;
+}
+
+
+/*
+   Description remains in normal
+   document flow. This is what makes
+   the card actually become taller.
+*/
+
+.job-description {
+  position: static;
+
+  width: 100%;
+
+  margin-top: 16px;
+  padding-top: 14px;
+  padding-bottom: 12px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.job-description p {
+  position: static;
+
+  margin: 0;
+
+  font-size: 14px;
+  line-height: 1.45;
+
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+}
+
+
+/* =========================
+   EXPAND ARROW
+   ========================= */
+
+.job-expand-button {
+  position: absolute;
+
+  left: 50%;
+  bottom: 5px;
+
+  transform: translateX(-50%);
+
+  width: 40px;
+  height: 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: none;
+  background: transparent;
+
+  cursor: pointer;
+}
+
+.job-expand-arrow {
+  display: block;
+
+  color: white;
+
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 1;
+
+  transition: transform 0.2s ease;
+}
+
+.job-expand-arrow.open {
+  transform: rotate(180deg);
+}
+
+
+
+
+.card {
+  width: 800px;
+  max-width: 100%;
+  height: 600px;
+  max-height: 100%;
+  padding: 24px;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+
+  transform: translateY(190px);
+
+  background-color: #171a2b;
+  border: 1px solid #353953;
+  border-radius: 16px;
+  color: #f1f5f9;
+}
+
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  text-align: left;
+    margin-right: -8px;
+      padding-right: 8px;
+}
+
+.card-title {
+  margin: 0 0 16px;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.card-title:empty {
+  display: none;
+}
+
+.card-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.card-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.card-content::-webkit-scrollbar-thumb {
+  background: #484365;
+  border-radius: 10px;
+}
+
+.card-content::-webkit-scrollbar-thumb:hover {
+  background: #726b9b;
+}
+
+.card-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  min-height: 60px;
+  padding: 16px 20px;
+  box-sizing: border-box;
+
+  background-color: #6d28d9;
+  border-radius: 12px;
+  color: white;
+  gap: 16px;
+}
+
+.card-item {
+  width: 100%;
+  padding: 18px 20px;
+  box-sizing: border-box;
+
+  background-color: #252340;
+  border: 1px solid #3d395c;
+  border-radius: 12px;
+
+  color: #f8fafc;
+}
+
+.card-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.card-item-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.card-item-header span {
+  color: #a5a3c0;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.card-item-role {
+  margin: 8px 0;
+  font-size: 14px;
+  color: #c4b5fd;
+}
+
+.card-item-summary {
+  margin: 0;
+  font-size: 13px;
+  color: #a5a3c0;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+/* Jobsy application design tokens */
+:root,
+:root[data-theme="dark"] {
+  --app-bg: #0d0f1e;
+  --sidebar-bg: #151729;
+  --surface: #1a2032;
+  --surface-raised: #252c42;
+  --text: #eef2ff;
+  --muted: #aeb9cf;
+  --border: #37415b;
+  --accent: #9278ee;
+  --accent-strong: #7554ce;
+}
+
+:root[data-theme="light"] {
+  --app-bg: #f4f6fb;
+  --sidebar-bg: #e7ebf4;
+  --surface: #ffffff;
+  --surface-raised: #f2f4fa;
+  --text: #1c2538;
+  --muted: #57657e;
+  --border: #cbd3e1;
+  --accent: #6653b4;
+  --accent-strong: #5a439f;
+}
+
+body, .app { background: var(--app-bg); color: var(--text); }
+.sidebar { background: var(--sidebar-bg); }
+.sidebar-nav a { color: var(--text); }
+.dashboard, .page-shell { color: var(--text); }
+.card { transform: none; margin: auto; background: var(--surface); border-color: var(--border); color: var(--text); }
+.overview-page .card { height: min(600px, calc(100% - 88px)); }
+.card-content { scrollbar-color: var(--border) transparent; }
+.card-item { display: block; flex-shrink: 0; background: var(--surface-raised); border-color: var(--border); color: var(--text); }
+.card-item-header h3 { color: var(--text); }
+.card-item-header time, .card-item-summary { color: var(--muted); }
+.card-item-role { color: var(--accent); }
+.card-item-details { padding-top: 7px; font-size: 13px; }
+.card-item-details summary { cursor: pointer; color: var(--muted); }
+.card-item-details .card-item-summary { white-space: pre-wrap; margin-top: 8px; }
+
+.page-shell {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  overflow-y: auto;
+  padding: 32px clamp(24px, 5vw, 90px);
+}
+.page-shell h1 { font-size: 44px; margin: 0 0 24px; }
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  max-width: 850px;
+  margin-bottom: 18px;
+}
+.panel h2 { font-size: 20px; margin: 0 0 16px; }
+.panel p { line-height: 1.55; }
+.panel label { display: block; margin-bottom: 9px; }
+.panel select, .panel input {
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: 11px 13px;
+  color: var(--text);
+  background: var(--surface-raised);
+  min-width: 200px;
+  max-width: 100%;
+}
+.panel select { display: block; min-width: 250px; }
+.panel a { color: var(--accent); }
+.muted, .empty-note { color: var(--muted); }
+.empty-note { text-align: center; padding: 24px 0; }
+.status-message { color: var(--accent); }
+.keyword-list { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 18px; }
+.keyword-chip { display: inline-flex; align-items: center; gap: 7px; border: 1px solid var(--border); background: var(--surface-raised); border-radius: 20px; padding: 6px 8px 6px 12px; font-size: 14px; }
+.keyword-chip button { border: none; border-radius: 50%; background: transparent; color: var(--muted); cursor: pointer; font-size: 21px; line-height: 1; }
+.keyword-chip button:hover { color: var(--text); }
+.inline-form { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin: 12px 0; }
+.inline-form input { flex: 1; min-width: 210px; }
+.primary-button, .secondary-button, .danger-button, .apply-button {
+  cursor: pointer;
+  border-radius: 9px;
+  padding: 10px 17px;
+  font-weight: 600;
+  border: 1px solid var(--border);
+}
+.primary-button, .apply-button { background: var(--accent-strong); color: white; border-color: transparent; }
+.secondary-button { background: var(--surface-raised); color: var(--text); }
+.danger-button { background: transparent; color: #ee7e91; margin-top: 18px; }
+button:disabled { opacity: .55; cursor: not-allowed; }
+.search-actions { display: flex; align-items: center; gap: 10px; justify-content: center; flex-shrink: 0; }
+.search-button { background: var(--accent-strong); }
+.search-area.active { height: 100%; }
+.results-layout { display: flex; flex: 1; flex-direction: column; width: 100%; min-height: 0; gap: 10px; }
+.results-container { flex: 1; min-height: 0; }
+.results-notice { margin: 0; color: var(--muted); font-size: 13px; }
+.search-diagnostics {
+  flex-shrink: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 11px 15px;
+  max-height: 38%;
+  overflow-y: auto;
+}
+.search-diagnostics summary { cursor: pointer; font-weight: 600; }
+.diagnostics-grid { font-size: 13px; color: var(--muted); display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 2px 16px; padding-top: 10px; }
+.diagnostics-grid p { margin: 3px 0; overflow-wrap: anywhere; }
+.job-card { border-color: var(--border); background: var(--surface); }
+.job-card a, .job-card p { color: var(--text); }
+.job-card h3 { color: var(--text); }
+.job-card .apply-button { display: inline-block; padding: 5px 13px; margin-top: 5px; font-size: 13px; }
+.job-description { border-color: var(--border); }
+.job-expand-arrow { color: var(--text); }
+.app-error { position: absolute; right: 15px; top: 12px; z-index: 10; color: #ff7e9d; }
+
+@media (max-width: 950px) {
+  .sidebar { flex-basis: 185px; width: 185px; padding: 90px 20px 25px; }
+  .sidebar-nav a { font-size: 22px; }
+  .dashboard-center:has(.search-area.active) { width: 96%; }
+  .page-shell { padding: 25px 20px; }
+}
+
+.filter-select { width: 190px; padding: 10px 12px; border: 1px solid var(--border); border-radius: 10px; color: var(--text); background: var(--surface); font-size: 16px; }
+#upload-button { border-color: var(--border); color: var(--text); background: var(--surface); }
+#upload-button:hover { background: var(--surface-raised); }
+.text-link { border: 0; padding: 0; background: none; color: var(--accent); text-decoration: underline; cursor: pointer; }
+
+
+/* v3: consistent centering for Profile and Settings (including short pages). */
+.page-shell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: safe center;
+  min-height: 0;
+}
+.page-shell > h1,
+.page-shell > .panel,
+.page-shell > .status-message,
+.page-shell > [role="alert"] {
+  width: 100%;
+  max-width: 850px;
+  flex-shrink: 0;
+}
+
+/* Resume confirmation at the upload location. */
+.resume-upload { display: flex; flex-direction: column; align-items: center; gap: 12px; max-width: 100%; }
+.resume-upload-success {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: min(480px, 90vw);
+  padding: 12px 18px;
+  border-radius: 14px;
+  border: 1px solid #388f76;
+  background: #133c33;
+  color: #c5f7de;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.45;
+  box-shadow: 0 6px 28px rgba(0,0,0,.09);
+  animation: text-reveal .32s ease-out both;
+}
+.resume-check {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #1e755a;
+  color: white;
+  font-weight: 700;
+}
+.resume-upload-error { color: #ff8ea4; max-width: 450px; text-align: center; }
+:root[data-theme="light"] .resume-upload-success { background: #e3f8ee; border-color: #92c9b5; color: #17533e; }
+
+/* JobSearch progress: deliberately indeterminate because page counts vary. */
+.search-progress {
+  flex-shrink: 0;
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface);
+  padding: 13px 16px;
+  animation: text-reveal .28s ease-out both;
+}
+.search-progress-head { display: flex; align-items: center; gap: 10px; min-width: 0; font-size: 13px; font-weight: 600; }
+.search-progress-count { margin-left: auto; white-space: nowrap; font-size: 12px; color: var(--muted); }
+.search-progress-caption { display: block; margin-top: 8px; font-size: 12px; color: var(--muted); }
+.search-progress-spinner {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+  border: 2px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: loading-spin .9s linear infinite;
+}
+.search-progress-track { overflow: hidden; margin-top: 11px; height: 7px; border-radius: 100px; background: var(--surface-raised); }
+.search-progress-fill {
+  height: 100%;
+  width: 34%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--accent-strong), #ac91ff, var(--accent-strong));
+  box-shadow: 0 0 14px rgba(146,120,238,.35);
+  animation: loading-sweep 1.65s ease-in-out infinite;
+}
+.stop-search-button {
+  padding: 11px 16px;
+  border: 1px solid #8b5167;
+  border-radius: 12px;
+  background: #412634;
+  color: #ffd5df;
+  font-weight: 600;
+  cursor: pointer;
+}
+.stop-search-button:hover:not(:disabled) { background: #5a3044; }
+.search-stopped { margin: 0; padding: 10px 13px; color: var(--muted); background: var(--surface); border-radius: 9px; }
+
+/* Space between Apply and the bottom expansion control. */
+.job-card { padding-bottom: 46px; }
+.job-card .apply-button { margin-bottom: 9px; }
+
+/* Discreet LinkedIn link stays at the bottom of the left sidebar. */
+.sidebar-footer { margin-top: auto; width: 100%; min-width: 0; }
+.linkedin-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 11px 10px;
+  border: 1px solid var(--border);
+  border-radius: 11px;
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 13px;
+  text-align: left;
+  line-height: 1.3;
+  transition: background .18s ease, border-color .18s ease, transform .18s ease;
+}
+.linkedin-link:hover { background: var(--surface-raised); border-color: var(--accent); transform: translateY(-2px); }
+.linkedin-logo { display: inline-grid; place-items: center; flex-shrink: 0; width: 24px; height: 24px; border-radius: 5px; background: #0a66c2; color: white; font-size: 14px; font-weight: 700; }
+.sidebar-link-error { font-size: 12px; color: #ff8ea4; overflow-wrap: anywhere; }
+
+/* Text movement is small and respects reduced-motion preferences. */
+.page-shell > h1, .dashboard > h1 { animation: text-reveal .48s cubic-bezier(.2,.75,.3,1) both; }
+.page-shell .panel { animation: text-reveal .36s ease-out both; }
+.page-shell .panel:nth-of-type(2) { animation-delay: 55ms; }
+.page-shell .panel:nth-of-type(3) { animation-delay: 110ms; }
+.results-notice, .search-stopped, .status-message { animation: text-reveal .3s ease-out both; }
+.card-item-details[open] .card-item-summary { animation: text-reveal .24s ease-out both; }
+@keyframes text-reveal { from { opacity: .45; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes loading-spin { to { transform: rotate(360deg); } }
+@keyframes loading-sweep { 0% { transform: translateX(-110%); } 50% { transform: translateX(140%); } 100% { transform: translateX(305%); } }
+@media (prefers-reduced-motion: reduce) {
+  .page-shell > h1, .dashboard > h1, .page-shell .panel, .resume-upload-success,
+  .search-progress, .results-notice, .search-stopped, .status-message,
+  .card-item-details[open] .card-item-summary, .search-progress-spinner,
+  .search-progress-fill { animation: none; }
+  .linkedin-link { transition: none; }
+  .linkedin-link:hover { transform: none; }
+}
+
+.dashboard-center:has(.search-area.active) .resume-upload { display: none; }
+@media (max-width: 700px) {
+  .search-progress-head { flex-wrap: wrap; }
+  .search-progress-count { margin-left: 23px; }
+  .sidebar { padding-left: 10px; padding-right: 10px; }
+  .linkedin-link { font-size: 12px; }
+}
+
+/* v0.1.3: spacious discovery controls and compact, accessible search button. */
+.dashboard-center { gap: 24px; }
+.dashboard-center:has(.search-area.active) {
+  top: 128px;
+  gap: 14px;
+}
+.search-toolbar {
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  gap: 22px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.toolbar-field { display: flex; flex-direction: column; gap: 8px; min-width: 188px; }
+.toolbar-field label { font-size: 12px; letter-spacing: .04em; font-weight: 700; color: var(--muted); }
+.toolbar-field .filter-select,
+.toolbar-field input {
+  height: 44px;
+  width: 100%;
+  margin: 0;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 0 14px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 14px;
+  outline-offset: 3px;
+}
+.toolbar-field input:focus, .toolbar-field select:focus { border-color: var(--accent); }
+.area-field { flex: 1 1 270px; max-width: 350px; }
+.area-hint { margin: -4px 0 0; font-size: 12px; color: #f3bcbf; text-align: center; }
+.search-area { gap: 14px; width: 100%; min-height: 0; }
+.search-area.active { gap: 14px; }
+.search-actions { gap: 18px; flex-wrap: wrap; margin: 4px 0 6px; }
+.search-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  min-height: 50px;
+  padding: 10px 19px;
+  border-radius: 13px;
+  border: 1px solid rgba(255,255,255,.2);
+  background: linear-gradient(135deg, #7050c8, #8562d9);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -.01em;
+  box-shadow: 0 6px 17px rgba(40,23,83,.24);
+  transition: transform .18s ease, filter .18s ease, box-shadow .18s ease;
+}
+.search-button:hover:not(:disabled) { transform: translateY(-2px); filter: brightness(1.09); box-shadow: 0 10px 24px rgba(60,35,125,.3); }
+.search-button:active:not(:disabled) { transform: translateY(0); }
+.search-button-icon { font-size: 27px; line-height: 1; font-weight: 400; }
+.search-button-arrow { font-size: 20px; font-weight: 400; opacity: .84; }
+.search-refresh { min-height: 46px; padding: 10px 20px; border-radius: 12px; font-size: 14px; }
+/* Extra space for Apply and its expand-arrow; keep five jobs per page. */
+.job-card { padding-bottom: 55px; }
+.job-card .apply-button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 7px 16px;
+  margin-top: 10px;
+  margin-bottom: 17px;
+  border-radius: 9px;
+  font-size: 13px;
+}
+.job-expand-button { bottom: 6px; }
+.profile-name-form { margin-top: 18px; }
+.profile-name-form label { font-size: 13px; font-weight: 600; }
+.profile-name-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.profile-name-row input { flex: 1; min-width: 170px; }
+.profile-name-row button { white-space: nowrap; }
+@media (max-width: 780px) {
+  .search-toolbar { gap: 14px; }
+  .area-field { max-width: none; }
+  .dashboard-center:has(.search-area.active) { top: 120px; }
+  .search-actions { gap: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .search-button { transition: none; }
+  .search-button:hover:not(:disabled) { transform: none; }
+}
+
+/* Keep enough actual room for the Apply action rather than clipping it in a fixed row. */
+.results-page {
+  height: auto;
+  min-height: 100%;
+  grid-template-rows: repeat(5, minmax(162px, auto));
+}
+.results-page:has(.job-card-expanded) { grid-template-rows: none; }
+.job-card { padding-bottom: 38px; overflow: visible; }
+.job-card .apply-button { margin-bottom: 12px; }

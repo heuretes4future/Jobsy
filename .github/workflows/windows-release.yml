@@ -1,0 +1,39 @@
+name: Build and publish Windows installer
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  windows-installer:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: swatinem/rust-cache@v2
+        with:
+          workspaces: src-tauri -> target
+      - name: Install dependencies
+        run: npm ci
+      - name: Create Windows installer and GitHub Release
+        uses: tauri-apps/tauri-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          releaseAssetNamePattern: "Jobsy-Windows-Setup[ext]"
+          tagName: ${{ github.ref_name }}
+          releaseName: "Jobsy ${{ github.ref_name }}"
+          releaseBody: |
+            Download the Windows .exe installer under Assets below.
+            You do not need to install Python, Node.js, or Rust to use Jobsy.
+            Windows SmartScreen may warn about unsigned installers.
+          releaseDraft: false
+          prerelease: false

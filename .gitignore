@@ -1,0 +1,31 @@
+# Build and local development
+node_modules/
+dist/
+dist-ssr/
+*.log
+*.local
+.env
+.env.*
+!.env.example
+.vscode/
+!.vscode/extensions.json
+.idea/
+.DS_Store
+
+# Private user data: DO NOT PUBLISH
+resume_data.json
+Store/applied.json
+Store/preferences.json
+preferences.json
+*.db-journal
+*.db-wal
+*.db-shm
+
+# Generated Tauri/Rust artifacts
+src-tauri/target/
+src-tauri/gen/schemas/
+src-tauri/.env*
+
+# Platform caches
+Thumbs.db
+/Jobsy/
