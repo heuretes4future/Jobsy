@@ -108,35 +108,11 @@ Do not commit personal profile, history or API credentials. In particular:
 - `resume_data.json` and `Store/applied.json` are excluded by `.gitignore` for migration compatibility; current data is stored in the Tauri app-data directory.
 - `.env` files and Rust build artifacts are ignored.
 - Never add a real résumé, private email conversations, passwords, tokens, personal job histories or screenshots containing personal information to the repository.
-- Run `git status --short` and inspect the repository contents before the first public push. **A `.gitignore` does not remove files previously committed or erase their history.** If this repo was ever private and contained personal data, create a new clean public repository or rewrite its Git history before publishing.
-
-### Publish a Windows installer with GitHub Releases
-
-The included GitHub Actions workflow runs on Windows and creates an NSIS `.exe` when you push a version tag.
-
-1. Create a **new public GitHub repository** for the cleaned source code (no prior private history).
-2. Push the contents of this `Application/` folder as the **repository root**. Make sure `Store/job_sources.json`, `LICENSE` and `.github/workflows/windows-release.yml` are included, but none of your local user data is.
-3. Create a tagged release matching the version in `package.json`, `src-tauri/Cargo.toml` and `src-tauri/tauri.conf.json`:
-
-   ```bash
-   git tag v0.1.3
-   git push origin v0.1.3
-   ```
-
-4. In **GitHub > Actions**, wait for **Build and publish Windows installer** to complete successfully. It will attach an `.exe` installer to a GitHub Release. Download it and test it on a separate Windows machine before advertising it.
-5. The **Download Jobsy for Windows** button above points directly to the stable filename `Jobsy-Windows-Setup.exe` in the latest published release; visitors don't need Rust, Node.js, or Git to use it.
-
-The workflow prepares a downloadable installer. It does **not** automatically sign Windows executables, publish to the Microsoft Store or install updates. Unsigned release files can trigger SmartScreen warnings. For high-trust public distribution, use code signing and make release checks part of your process.
-
-### Versioning
-
-Update the versions in `package.json`, `src-tauri/Cargo.toml` and `src-tauri/tauri.conf.json` together before publishing the next tag.
+- Run `git status --short` and inspect the repository contents before the first public push. **A `.gitignore` does not remove files previously committed or erase their history.
 
 ### Contributing and licensing
 
 Jobsy is Copyright © 2026 **Oscar Lundin** and is released under the **GNU General Public License version 3.0 only (GPL-3.0-only)**. See [LICENSE](LICENSE) for the full official license. You may run, modify, redistribute and even sell copies, **provided you comply with GPLv3**, including preserving notices, identifying modifications and providing the corresponding source code when distributing versions. Derivatives must remain GPL-licensed.
-
-**GPLv3 does not prohibit commercial resale** and does not guarantee a particular prominent display of the author's name in every marketing page. If your goal is to ban resale entirely or require special marketing attribution, GPLv3 is not that license; those restrictions would need a different (usually non-open-source) arrangement and legal review.
 
 This application is distributed **without any warranty**. For license text and terms, see `LICENSE` and [GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0.html).
 
