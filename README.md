@@ -16,8 +16,6 @@ You don't need to know how to code. Upload your résumé, choose an area (or sea
 2. Run the installer, then launch Jobsy from the Start menu.
 3. You can upload a résumé PDF and start searching right away. No account registration or technical setup is required.
 
-The download becomes available **after the first GitHub Release is published**. Until then, this link won't have an installer. Unsigned installers can trigger a Windows SmartScreen warning; do not bypass security warnings unless you trust the source. For wider distribution, code signing is recommended.
-
 ## What Jobsy can do
 
 - **Résumé-based search:** Extract skills from a PDF résumé, then search Swedish job listings with a limited set of keywords.
